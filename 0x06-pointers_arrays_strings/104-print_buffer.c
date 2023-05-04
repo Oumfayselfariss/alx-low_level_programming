@@ -1,17 +1,45 @@
 #include "main.h"
 #include <stdio.h>
+#include <ctype.h>
 
 /**
- * main - check the code
+ * print_buffer - prints the content of a buffer
+ * @b: the buffer to print
+ * @size: the number of bytes to print
  *
- * Return: Always 0.
+ * Return: void
  */
-int main(void)
+void print_buffer(char *b, int size)
 {
-    char buffer[] = "This is a longer string!\0And this is the rest of the #buffer :)\1\2\3\4\5\6\7#cisfun\n\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x20\x21\x34\x56#pointersarefun #infernumisfun\n";
+    int i, j;
 
-    printf("%s\n", buffer);
-    printf("---------------------------------\n");
-    print_buffer(buffer, sizeof(buffer));
-    return (0);
+    for (i = 0; i < size; i += 10)
+    {
+        printf("%08x: ", i);
+
+        for (j = 0; j < 10; j++)
+        {
+            if (i + j < size)
+                printf("%02x", *(b + i + j));
+            else
+                printf("  ");
+
+            if (j % 2 == 1)
+                printf(" ");
+        }
+
+        for (j = 0; j < 10 && i + j < size; j++)
+        {
+            char c = *(b + i + j);
+
+            if (isprint(c))
+                putchar(c);
+            else
+                putchar('.');
+        }
+
+        printf("\n");
+    }
+    if (size <= 0)
+        printf("\n");
 }

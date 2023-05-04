@@ -1,26 +1,56 @@
 #include "main.h"
 #include <stdio.h>
+#include <string.h>
 
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
-int main(void)
+char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-        char *n = "-1234567892434574367823574575678477685785645685876876774586734734563456453743756756784458";
-        char *m = "-9034790663470697234682914569346259634958693246597324659762347956349265983465962349569346";
-        char r[100];
-        char *res;
+    int len1 = strlen(n1);
+    int len2 = strlen(n2);
+    int carry = 0;
 
-        res = infinite_add(n, m, r, 100);
-        if (res == 0)
+    if (len1 + 1 > size_r || len2 + 1 > size_r)
+    {
+        return 0;
+    }
+
+    int i = len1 - 1;
+    int j = len2 - 1;
+    int k = 0;
+
+    while (i >= 0 || j >= 0 || carry != 0)
+    {
+        int sum = carry;
+
+        if (i >= 0)
         {
-                printf("Error\n");
+            sum += n1[i] - '0';
+            i--;
         }
-        else
+
+        if (j >= 0)
         {
-                printf("%s + %s = %s\n", n, m, res);
+            sum += n2[j] - '0';
+            j--;
         }
-        return (0);
+
+        if (k >= size_r)
+        {
+            return 0;
+        }
+
+        r[k] = (sum % 10) + '0';
+        carry = sum / 10;
+        k++;
+    }
+
+    r[k] = '\0';
+
+    for (int i = 0; i < k / 2; i++)
+    {
+        char temp = r[i];
+        r[i] = r[k - i - 1];
+        r[k - i - 1] = temp;
+    }
+
+    return r;
 }
