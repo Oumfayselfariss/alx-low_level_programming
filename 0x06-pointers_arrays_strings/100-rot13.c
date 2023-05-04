@@ -1,34 +1,29 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
- * main - entry point
+ * rot13 - encodes a string using rot13
  *
- * Return: Always 0
+ * @s: string to be encoded
+ *
+ * Return: pointer to the encoded string
  */
-int main(void)
+char *rot13(char *s)
 {
-    FILE *fp;
-    char *line = NULL;
-    size_t len = 0;
-    ssize_t read;
+        int i, j;
+        char alphabets[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        char rot13[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-    fp = fopen("example.txt", "r");
-    if (fp == NULL)
-    {
-        perror("Error opening file");
-        exit(EXIT_FAILURE);
-    }
+        for (i = 0; s[i] != '\0'; i++)
+        {
+                for (j = 0; alphabets[j] != '\0'; j++)
+                {
+                        if (s[i] == alphabets[j])
+                        {
+                                s[i] = rot13[j];
+                                break;
+                        }
+                }
+        }
 
-    while ((read = getline(&line, &len, fp)) != -1)
-    {
-        printf("Retrieved line of length %zu:\n", read);
-        printf("%s", line);
-    }
-
-    fclose(fp);
-    if (line)
-        free(line);
-    exit(EXIT_SUCCESS);
+        return s;
 }
