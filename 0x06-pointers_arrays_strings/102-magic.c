@@ -1,16 +1,16 @@
 #include <stdio.h>
 
 /**
- * main - prints the third element of an array and a new line
+ * main - Entry point
  *
- * Return: Always 0.
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-    int a[3] = { 0, 1, 98 };
+    int a[5] = { 98, 198, 298, 398, 498 };
     int *p;
 
-    p = &a[2];
-    printf("a[2] = %d\n", *p);
+    p = a + 2;
+    printf("a[2] = %d\n", *(p));
     return (0);
 }
