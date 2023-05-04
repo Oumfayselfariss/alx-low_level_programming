@@ -1,24 +1,24 @@
 #include "main.h"
-
 /**
- * rot13 - encodes a string using rot13
- * @s: input string
- *
- * Return: pointer to encoded string
+ * leet - encode into 1337speak
+ * @n: input value
+ * Return: n value
  */
-char *rot13(char *s)
+char *leet(char *n)
 {
-	int i;
-	char *str = s;
-	char *org = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char *rot = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	int i, j;
+	char s1[] = "aAeEoOtTlL";
+	char s2[] = "4433007711";
 
-	for (i = 0; str[i]; i++)
+	for (i = 0; n[i] != '\0'; i++)
 	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i] = rot[str[i] - 'a' + 26];
-		else if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] = rot[str[i] - 'A'];
+		for (j = 0; j < 10; j++)
+		{
+			if (n[i] == s1[j])
+			{
+				n[i] = s2[j];
+			}
+		}
 	}
-	return (s);
+	return (n);
 }

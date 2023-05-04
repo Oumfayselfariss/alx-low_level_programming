@@ -1,26 +1,20 @@
 #include "main.h"
-
 /**
- * leet - encodes a string into 1337
- * @str: string to be encoded
+ * string_toupper - change all lowercase to uppercase
+ * @n: pointer
  *
- * Return: the encoded string
+ * Return: n
  */
-char *leet(char *str)
+char *string_toupper(char *n)
 {
-	int i, j;
-	char letters[] = "aAeEoOtTlL";
-	char numbers[] = "4433007711";
+	int i;
 
-	for (i = 0; str[i] != '\0'; i++)
+	i = 0;
+	while (n[i] != '\0')
 	{
-		for (j = 0; letters[j] != '\0'; j++)
-		{
-			if (str[i] == letters[j])
-			{
-				str[i] = numbers[j];
-			}
-		}
+		if (n[i] >= 'a' && n[i] <= 'z')
+			n[i] = n[i] - 32;
+		i++;
 	}
-	return (str);
+	return (n);
 }

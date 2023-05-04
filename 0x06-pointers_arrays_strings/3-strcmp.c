@@ -1,28 +1,23 @@
 #include "main.h"
-
 /**
- * _strcat - concatenate two strings
- * @dest: input value
- * @src: input value
+ * _strcmp - compare string values
+ * @s1: input value
+ * @s2: input value
  *
- * Return: pointer to dest
+ * Return: s1[i] - s2[i]
  */
-char *_strcat(char *dest, char *src)
+int _strcmp(char *s1, char *s2)
 {
-	int dest_len, i;
+	int i;
 
-	dest_len = 0;
-	while (dest[dest_len] != '\0')
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
 	{
-		dest_len++;
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+		i++;
 	}
-
-	for (i = 0; src[i] != '\0'; i++)
-	{
-		dest[dest_len + i] = src[i];
-	}
-
-	dest[dest_len + i] = '\0';
-
-	return (dest);
+	return (0);
 }

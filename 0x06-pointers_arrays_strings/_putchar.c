@@ -1,21 +1,14 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
- * print_array - print array values
- * @a: input value
- * @n: input value
- *
- * Return: void
- */
-void print_array(int *a, int n)
+* _putchar - writes the character c to stdout
+* @c: The character to print
+*
+* Return: On success 1.
+* On error, -1 is returned, and errno is set appropriately.
+*/
+int _putchar(char c)
 {
-	int i;
-
-	for (i = 0; i < n; i++)
-	{
-		printf("%d", a[i]);
-		if (i < n - 1)
-			printf(", ");
-	}
-	printf("\n");
+return (write(1, &c, 1));
 }

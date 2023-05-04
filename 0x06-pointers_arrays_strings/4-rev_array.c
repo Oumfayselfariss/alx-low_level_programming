@@ -1,19 +1,20 @@
 #include "main.h"
-
 /**
- * print_chessboard - prints the chessboard
- * @a: input array
+ * reverse_array - reverse array of integers
+ * @a: array
+ * @n: number of elements of array
  *
  * Return: void
  */
-void print_chessboard(char (*a)[8])
+void reverse_array(int *a, int n)
 {
-	int i, j;
+	int i;
+	int t;
 
-	for (i = 0; i < 8; i++)
+	for (i = 0; i < n--; i++)
 	{
-		for (j = 0; j < 8; j++)
-			_putchar(a[i][j]);
-		_putchar('\n');
+		t = a[i];
+		a[i] = a[n];
+		a[n] = t;
 	}
 }

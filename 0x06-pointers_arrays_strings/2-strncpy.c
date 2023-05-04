@@ -1,13 +1,27 @@
-#include <stdio.h>
-
-int main(void)
+#include "main.h"
+/**
+ * _strncpy - copy a string
+ * @dest: input value
+ * @src: input value
+ * @n: input value
+ *
+ * Return: dest
+ */
+char *_strncpy(char *dest, char *src, int n)
 {
-    int num1, num2;
+	int j;
 
-    printf("Enter two integers: ");
-    scanf("%d %d", &num1, &num2);
+	j = 0;
+	while (j < n && src[j] != '\0')
+	{
+		dest[j] = src[j];
+		j++;
+	}
+	while (j < n)
+	{
+		dest[j] = '\0';
+		j++;
+	}
 
-    printf("The sum of %d and %d is %d\n", num1, num2, num1 + num2);
-
-    return 0;
+	return (dest);
 }
