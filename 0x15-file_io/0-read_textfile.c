@@ -2,41 +2,38 @@
 #include <stdlib.h>
 
 /**
-* read_textfile - Reads a text file and prints it to POSIX stdout.
-* @filename: A pointer to the name of the file.
-* @letters: The number of letters the
-*           function should read and print.
-*
-* Return: If the function fails or filename is NULL - 0.
-*         O/w - the actual number of bytes the function can read and print.
-*/
-ssize_t read_textfile(const char *filename, size_t letters) {
-    if (filename == NULL) {
-        return 0;
-    }
+ * read_textfile - Reads a text file and prints it to POSIX stdout.
+ * @filename: A pointer to the name of the file.
+ * @letters: The number of letters the
+ *           function should read and print.
+ *
+ * Return: If the function fails or filename is NULL - 0.
+ *         O/w - the actual number of bytes the function can read and print.
+ */
+ssize_t read_textfile(const char *filename, size_t letters)
+{
+	ssize_t o, r, w;
+	char *buffer;
 
-    FILE *file = fopen(filename, "r");
-    if (file == NULL) {
-        return 0;
-    }
+	if (filename == NULL)
+		return (0);
 
-    char buffer[letters + 1];
-    ssize_t bytesRead = fread(buffer, sizeof(char), letters, file);
+	buffer = malloc(sizeof(char) * letters);
+	if (buffer == NULL)
+		return (0);
 
-    if (bytesRead <= 0) {
-        fclose(file);
-        return 0;
-    }
+	o = open(filename, O_RDONLY);
+	r = read(o, buffer, letters);
+	w = write(STDOUT_FILENO, buffer, r);
 
-    buffer[bytesRead] = '\0';  // Null-terminate the buffer
+	if (o == -1 || r == -1 || w == -1 || w != r)
+	{
+		free(buffer);
+		return (0);
+	}
 
-    ssize_t bytesWritten = fwrite(buffer, sizeof(char), bytesRead, stdout);
-    fclose(file);
+	free(buffer);
+	close(o);
 
-    if (bytesWritten != bytesRead) {
-        return 0;
-    }
-
-    return bytesWritten;
+	return (w);
 }
-
